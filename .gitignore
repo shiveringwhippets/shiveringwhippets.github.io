@@ -1,0 +1,7 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore large video files (so you don't accidentally upload them)
+*.mov
+*.avi
