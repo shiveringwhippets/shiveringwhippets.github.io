@@ -1,0 +1,140 @@
+/* --- Final Stacked 3D Theme - Refined --- */
+
+:root {
+    /* Top and middle colors kept same; Bottom color (#0f3460) adjusted to be more saturated (#003da6) */
+    /* --bg-gradient: linear-gradient(170deg, #1a1a2e 0%, #16213e 50%, #003da6 100%); */
+    --bg-gradient: linear-gradient(170deg, #1a1a2e 0%, #003da6 50%, #6C86CB 100%);
+	
+    --card-bg: #1e1e2d;
+    --accent-color:#003da6; 
+    --border-radius: 25px;
+}
+
+body {
+    font-family: Arial, sans-serif; /* Standard Arial */
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: white;
+    padding-bottom: 50px;
+    /* Centering the overall layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Gradation Header with Reversed Vertical Colors --- */
+header h1 {
+    font-family: Arial, sans-serif;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: normal; /* Bold removed as requested */
+    margin: 50px 0;
+    text-align: center;
+    
+    /* Vertical gradation reversing the background colors (Top: Blue, Bottom: Navy) */
+    /*background: linear-gradient(to bottom, #003da6 0%, #16213e 50%, #1a1a2e 100%);*/
+    background: linear-gradient(to bottom, #003da6 0%, #6C86CB 70%, #F4F6FB 100%);
+	
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Shadow preserved for 3D depth against the background */
+    text-shadow: 
+        0 2px 4px rgba(0,0,0,0.4),
+        0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* --- Centered Navigation --- */
+nav {
+    text-align: center;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+nav a {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin: 0 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+nav a:hover {
+    background: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+/* --- Centered Table Gallery --- */
+table {
+    margin: 0 auto;           /* Centers the table horizontally */
+    border-collapse: separate; 
+    border-spacing: 20px;      
+}
+
+/* --- Stacked Card Effect for Table Cells --- */
+td {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Stacked shadow effect for physical depth */
+    box-shadow: 
+        0 7px 0 0 #0f3460, 
+        0 14px 0 0 #16213e,
+        0 28px 48px rgba(0,0,0,0.5);
+    vertical-align: top;
+}
+
+td:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+td img {
+    width: 100%;
+    max-width: 300px; 
+    border-radius: calc(var(--border-radius) - 10px);
+    display: block;
+}
+
+figcaption {
+    padding-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+}
+
+/* --- Centered Video Page Layout --- */
+.video-container {
+    width: 100%;
+    max-width: 1024px; /* Centered with a 1024px width limit */
+    margin: 40px auto;
+    text-align: center;
+}
+
+video {
+    width: 100%;       
+    max-width: 1024px; 
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 3px solid rgba(255,255,255,0.1);
+    display: block;
+    margin: 0 auto;    
+}
+
+footer {
+    text-align: center;
+    margin-top: 100px;
+    padding-bottom: 20px;
+    opacity: 0.5;
+    width: 100%;
+}
