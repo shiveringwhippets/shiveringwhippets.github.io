@@ -1,4 +1,4 @@
-/* --- Final Stacked 3D Theme - Restored --- */
+/* --- Final Stacked 3D Theme - Restored & Refined --- */
 
 :root {
     --bg-gradient: linear-gradient(170deg, #1a1a2e 0%, #003da6 50%, #6C86CB 100%);
@@ -61,21 +61,24 @@ td {
     border-radius: var(--border-radius);
     padding: 4px;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Stacked shadow effect for physical depth */
     box-shadow: 
         0 5px 0 0 #0f3460, 
         0 10px 0 0 #16213e,
         0 15px 30px rgba(0,0,0,0.5);
 }
 
+/* Updated Hover: Makes stacked shadows vanish and replaces them with a lift effect */
 td:hover {
     transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6); 
 }
 
 /* --- Thumbnail Overlay Logic --- */
 .thumb-wrapper {
     position: relative; /* Anchor for centered text */
-    width: 300px;      /* Matches your original img width */
-    height: 169px;     /* Forced 16:9 height for 300px width */
+    width: 300px;      
+    height: 169px;     /* Forced 16:9 ratio for 300px width */
     overflow: hidden;
     border-radius: calc(var(--border-radius) - 10px);
 }
@@ -91,7 +94,7 @@ td:hover {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Mathematical centering */
     width: 100%;
     padding: 8px 0;
     background: rgba(0, 0, 0, 0.6);
@@ -100,7 +103,7 @@ td:hover {
     text-align: center;
     text-transform: uppercase;
     font-size: 0.85rem;
-    pointer-events: none;
+    pointer-events: none; /* Clicks pass through to the link */
 }
 
 /* --- Video Player Fix (The "Lock") --- */
@@ -116,8 +119,8 @@ td:hover {
 video {
     width: 100%;
     max-width: 1024px;
-    aspect-ratio: 16 / 9;
-    min-height: 576px; /* Pre-sets the large size */
+    aspect-ratio: 16 / 9; /* Prevents jumping by pre-setting shape */
+    min-height: 576px;    /* Pre-sets the vertical space */
     object-fit: cover;
     background-color: #000;
     border-radius: var(--border-radius);

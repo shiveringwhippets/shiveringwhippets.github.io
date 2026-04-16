@@ -1,4 +1,4 @@
-/* --- Final Stacked 3D Theme - Restored & Refined --- */
+/* --- Final Stacked 3D Theme - Fixed Centering & Scrolling --- */
 
 :root {
     --bg-gradient: linear-gradient(170deg, #1a1a2e 0%, #003da6 50%, #6C86CB 100%);
@@ -14,7 +14,16 @@ body {
     background: var(--bg-gradient);
     background-attachment: fixed;
     color: white;
-    padding: 0 20px 50px 20px; /* Added side padding for mobile breathing room */
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start ensures the scrollbar starts at the 0,0 coordinate on small screens */
+    align-items: flex-start; 
+}
+
+/* This rule ensures your text and gallery sections remain centered on large screens */
+header, nav, .gallery, footer {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,36 +31,14 @@ body {
 
 /* --- Header & Nav --- */
 header h1 {
-    font-size: clamp(2rem, 8vw, 3.5rem); /* Scales between 2rem and 3.5rem based on screen */
+    font-size: 3.5rem;
     text-transform: uppercase;
-    margin: 50px 0;
+    margin: 50px auto; /* 'auto' maintains horizontal centering despite body alignment */
     text-align: center;
     background: linear-gradient(to bottom, #003da6 0%, #6C86CB 70%, #F4F6FB 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-}
-/* Specifically targets the title on video detail pages */
-/* 2.625rem is 25% smaller than your main 3.5rem title */
-body:has(.video-container) header h1 {
-    font-size: clamp(1.5rem, 6vw, 2.625rem); 
-    margin: 30px 0; /* Slightly tighter margins for the smaller text */
-}
-
-/* Subtitle matching footer style */
-.header-subtitle {
-    text-align: center;
-    margin: -35px 0 35px 0; /* Pulls it closer to the title and pushes the nav down */
-    opacity: 0.5;           /* Matches the footer opacity */
-    font-size: 2rem;        /* Standard text size */
-    font-weight: normal;
-}
-
-nav {
-    display: flex;
-    flex-wrap: wrap; /* Allows buttons to wrap on very small phones */
-    justify-content: center;
-    gap: 10px;
 }
 
 nav a {
@@ -61,6 +48,7 @@ nav a {
     text-decoration: none;
     color: white;
     font-weight: bold;
+    margin: 0 10px;
     display: inline-block;
     transition: all 0.3s ease;
 }
@@ -70,27 +58,30 @@ nav a:hover {
     transform: translateY(-3px);
 }
 
-/* --- Responsive Gallery Container --- */
+/* --- Gallery Scroll Fix --- */
 .gallery {
     width: 100%;
-    max-width: 1300px; /* Limits the gallery width on huge monitors */
-    display: flex;
-    justify-content: center;
-    overflow-x: hidden; /* Prevents side scrolling */
+    overflow-x: auto; 
+    padding: 20px 0;
+    -webkit-overflow-scrolling: touch;
+    display: block; 
 }
 
 /* --- 3D Table Gallery --- */
 table {
-    width: 100%; /* Makes table take up available container space */
+    /* Auto margins center the table when there is room, but snap to the left edge when not */
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: separate; 
-    border-spacing: clamp(10px, 2vw, 20px); /* Smaller spacing on smaller screens */
+    border-spacing: 20px;
+    /* Prevents the table from shrinking, ensuring full width for scrolling */
+    min-width: max-content; 
 }
 
 td {
     background: var(--card-bg);
     border-radius: var(--border-radius);
     padding: 4px;
-    width: 25%; /* Divide into 4 equal columns */
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 
         0 5px 0 0 #0f3460, 
@@ -106,10 +97,10 @@ td:hover {
 /* --- Thumbnail Overlay Logic --- */
 .thumb-wrapper {
     position: relative; 
-    width: 100%;       /* Fills the TD width */
-    max-width: 300px;  /* Keeps original max size */
-    margin: 0 auto;    /* Centers inside TD */
-    aspect-ratio: 16 / 9; /* Replaces fixed height for fluid scaling */
+    width: 300px;      
+    max-width: 90vw;   
+    height: auto;      
+    aspect-ratio: 16 / 9; 
     overflow: hidden;
     border-radius: calc(var(--border-radius) - 10px);
 }
@@ -133,11 +124,11 @@ td:hover {
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
-    font-size: clamp(0.6rem, 1.5vw, 0.85rem); /* Text scales down on small screens */
+    font-size: 0.85rem;
     pointer-events: none; 
 }
 
-/* --- Video Player Responsive Fix --- */
+/* --- Video Player Fix --- */
 .video-container {
     width: 100%;
     max-width: 1024px;
@@ -150,8 +141,8 @@ td:hover {
 video {
     width: 100%;
     max-width: 1024px;
-    height: auto; /* Allows height to scale with width */
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 9; 
+    min-height: 576px;    
     object-fit: cover;
     background-color: #000;
     border-radius: var(--border-radius);
@@ -163,9 +154,4 @@ footer {
     text-align: center;
     margin-top: 100px;
     opacity: 0.5;
-}
-/* Targets the name ONLY on pages with a video player */
-body:has(.video-container) .header-subtitle {
-    margin-top: -15px; /* Moves the name down (less negative than the default) */
-    margin-bottom: 45px; /* Adds space above the navigation buttons */
 }
